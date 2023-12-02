@@ -1,7 +1,8 @@
-# Individual Flags CTFD Plugin
+# Individual Flags CTFd Plugin
 
-A CTFD plugin to make challenges that have per-user flags. This will introduce a new challenge type where flags
-can be configured per user to contain bytes derived with a keyed hash function to make it different (or at least likely different) from other users
+A CTFd plugin to make challenges that have per-user flags. This will introduce a new challenge type where flags
+can be configured per user to contain bytes derived with a keyed hash function to make it different (or at least
+likely different) from other users
 
 # How to install plugin
 
@@ -10,7 +11,7 @@ TODO
 # How to use plugin
 
 1. Create a new challenge with the type `individual` with a static flag with the format listed below.
-2. Add a flag with the type `key` to add an HMAC SHA-256 key that'll be used to make the flag unique per person. See below for how to get what the per-user data will be.
+2. Add a flag with the type `key` to add an HMAC-SHA-256 key that'll be used to make the flag unique per person. See below for how to get what the per-user data will be.
 
 
 # Documentation
