@@ -1,5 +1,5 @@
-from CTFd.plugins.challenges import CHALLENGE_CLASSES, CTFdStandardChallenge, BaseFlag
-from CTFd.plugins.flags import FLAG_CLASSES, FlagException, get_flag_class, CTFdStaticFlag
+from CTFd.plugins.challenges import CHALLENGE_CLASSES, CTFdStandardChallenge
+from CTFd.plugins.flags import FLAG_CLASSES, BaseFlag, FlagException, get_flag_class, CTFdStaticFlag
 from CTFd.models import Flags
 from CTFd.plugins import register_plugin_assets_directory
 
