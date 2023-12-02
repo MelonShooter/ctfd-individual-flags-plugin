@@ -40,3 +40,4 @@ user submitting the flag.
 # Future work
 
 1. Add a way to individualize file distribution
+2. Add separate templates to use for challenges, not just from standard
