@@ -1,13 +1,14 @@
-from CTFd.plugins.challenges import CHALLENGE_CLASSES, FLAG_CLASSES, CTFdStandardChallenge, BaseFlag
-from CTFd.plugins.flags import FlagException, get_flag_class, CTFdStaticFlag
+from CTFd.plugins.challenges import CHALLENGE_CLASSES, CTFdStandardChallenge, BaseFlag
+from CTFd.plugins.flags import FLAG_CLASSES, FlagException, get_flag_class, CTFdStaticFlag
 from CTFd.models import Flags
 from CTFd.plugins import register_plugin_assets_directory
 
 CHALLENGE_NAME = "individual"
 FLAG_NAME = "key"
 
+
 class KeyFlag(BaseFlag):
-    name = "key"
+    name = FLAG_NAME
     templates = {
         "create": "/plugins/individual_challenges/assets/keys/create.html",
         "update": "/plugins/individual_challenges/assets/keys/edit.html",
@@ -48,7 +49,9 @@ class IndividualChallenge(CTFdStandardChallenge):
                 return False, str(e)
         return False, "Incorrect"
 
+
 def load(app):
     CHALLENGE_CLASSES[CHALLENGE_NAME] = IndividualChallenge
     FLAG_CLASSES[FLAG_NAME] = KeyFlag
-    register_plugin_assets_directory(app, base_path="/plugins/individual_challenges/assets/keys/")
+    register_plugin_assets_directory(
+        app, base_path="/plugins/individual_challenges/assets/keys/")
