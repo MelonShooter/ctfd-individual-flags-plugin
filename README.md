@@ -20,10 +20,11 @@ TODO
 
 When making `individual` challenges, there should be a static flag containing a special string that will
 be replaced with the random bytes from the keyed hash function. The special string is of the following format
-`%%%%<number of hex digits; 0-64>%%%%`. For example, `%%%%16%%%%` would be replaced with 16 hex digits (8 bytes) from the keyed hash
-generated as described in the section below. If something other than 0-64 is provided for the number of hex digits,
-an error will be generated upon flag submission. Flag example: `my_ctf{flag_text_before_%%%%16%%%%_more_text_after}`.
-See below for what this `%%%%16%%%%` would be replaced with.
+`%%%%<number of hex digits; 1-64>%%%%`. For example, `%%%%16%%%%` would be replaced with 16 hex digits (8 bytes) from the
+keyed hash generated as described in the section below. If something other than 1-64 is provided for the number of hex digits,
+an error will be generated upon flag submission.
+
+Static flag example: `my_ctf{flag_text_before_%%%%16%%%%_more_text_after}`.
 
 Note: Only the first occurrence of the string above is replaced.
 

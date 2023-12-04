@@ -1,0 +1,23 @@
+{% extends "admin/challenges/create.html" %}
+
+{% block header %}
+<div class="alert alert-secondary" role="alert">
+	Individual challenges are challenges that create semi-unique flag values per user. THe higher the
+    number of hex digits to include, the lower chance of a collision.
+</div>
+{% endblock %}
+
+{% block value %}
+<div class="form-group"></div>
+    <label for="value">HMAC Key<br>
+        <small class="form-text text-muted">
+            This is the HMAC-SHA-256 key to use to generate flag randomizing values.
+        </small>
+    </label>
+    <input type="text" class="form-control" name="hmackey" placeholder="Enter HMAC-SHA-256 key" required>
+</div>
+{% endblock %}
+
+{% block type %}
+<input type="hidden" value="individual" name="type" id="chaltype">
+{% endblock %}

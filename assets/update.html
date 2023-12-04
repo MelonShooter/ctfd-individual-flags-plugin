@@ -1,0 +1,12 @@
+{% extends "admin/challenges/update.html" %}
+
+{% block value %}
+<div class="form-group"></div>
+    <label for="value">Key<br>
+        <small class="form-text text-muted">
+            This is the HMAC-SHA-256 key to use to generate flag randomizing values.
+        </small>
+    </label>
+    <input type="text" class="form-control chal-hmackey" name="hmackey" placeholder="Enter HMAC-SHA-256 key" value="{{ challenge.hmackey }}" required>
+</div>
+{% endblock %}
