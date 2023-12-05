@@ -107,9 +107,20 @@ class IndividualChallenge(BaseChallenge):
                 # TODO: Perform side-channel attack analysis on this.
                 username = get_current_user().name
                 unique_flag_part_len = re.search(
-                    r"%%%%(\d)+%%%%", flag.content).group(1)
-                unique_flag_part = hmac.new(bytes(challenge.hmackey), bytes(
-                    username), hashlib.sha256).hexdigest()[:unique_flag_part_len]
+                    r"%%%%(\d+)%%%%", flag.content).group(1)
+
+                if unique_flag_part_len is None:
+                    raise FlagException(
+                        "All flags for the challenge must have a valid substitutition string. Contact an administrator with this error.")
+
+                try:
+                    unique_flag_part_len = int(unique_flag_part_len)
+                except ValueError:
+                    raise FlagException(
+                        "All flags for the challenge must have a valid substitutition string. Contact an administrator with this error.")
+
+                unique_flag_part = hmac.new(bytes(challenge.hmackey, 'utf-8'), bytes(
+                    username, 'utf-8'), hashlib.sha256).hexdigest()[:unique_flag_part_len]
                 correct_flag = re.sub(
                     r"%%%%(\d)+%%%%", unique_flag_part, flag.content)
 
