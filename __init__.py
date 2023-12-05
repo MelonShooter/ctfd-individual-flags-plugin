@@ -107,11 +107,13 @@ class IndividualChallenge(BaseChallenge):
                 # TODO: Perform side-channel attack analysis on this.
                 username = get_current_user().name
                 unique_flag_part_len = re.search(
-                    r"%%%%(\d+)%%%%", flag.content).group(1)
+                    r"%%%%(\d+)%%%%", flag.content)
 
                 if unique_flag_part_len is None:
                     raise FlagException(
                         "All flags for the challenge must have a valid substitutition string. Contact an administrator with this error.")
+
+                unique_flag_part_len = unique_flag_part_len.group(1)
 
                 try:
                     unique_flag_part_len = int(unique_flag_part_len)
