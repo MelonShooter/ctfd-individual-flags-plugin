@@ -31,7 +31,7 @@ Note: Only the first occurrence of the string above is replaced.
 ## `key` flag type
 
 When adding this flag type, a securely generated string of 32 random bytes in hex is pre-populated into the field to be used as
-the HMAC SHA-256 key to generate the per-user part of the flag. A custom key may also be provided.
+the HMAC-SHA-256 key to generate the per-user part of the flag. A custom key may also be provided.
 
 ## What the per-user part contains
 
