@@ -5,6 +5,11 @@ from CTFd.plugins.challenges import CHALLENGE_CLASSES, BaseChallenge
 from CTFd.plugins.flags import FlagException, get_flag_class
 from CTFd.plugins import register_plugin_assets_directory
 from CTFd.plugins.migrations import upgrade
+from CTFd.utils.user import get_current_user
+
+import re
+import hashlib
+import hmac
 
 PLUGIN_NAME = "ctfd-individual-flags-plugin"
 CHALLENGE_NAME = "individual"
@@ -93,15 +98,35 @@ class IndividualChallenge(BaseChallenge):
 
         for flag in flags:
             try:
-                # Only works if the flag type is a string.
-                if not isinstance(flag, str):
-                    continue
+                # Only works if the flag is static.
+                if flag.type != "static":
+                    raise FlagException(
+                        f"Only static flags are allowed, found a \"{ flag.type }\" type flag. Contact an administrator with this error.")
 
-                # Substitute value in for flag.
-                # TODO: Finish.
+                # Get correct flag.
+                # TODO: Perform side-channel attack analysis on this.
+                username = get_current_user().name
+                unique_flag_part_len = re.search(
+                    r"%%%%(\d)+%%%%", flag.content).group(1)
+                unique_flag_part = hmac.new(bytes(challenge.hmackey), bytes(
+                    username), hashlib.sha256).hexdigest()[:unique_flag_part_len]
+                correct_flag = re.sub(
+                    r"%%%%(\d)+%%%%", unique_flag_part, flag.content)
 
                 # Compare flag.
-                if get_flag_class(flag.type).compare(flag, submission):
+                if len(correct_flag) != len(submission):
+                    continue
+
+                result = 0
+
+                if flag.data == "case_insensitive":
+                    for x, y in zip(correct_flag.lower(), submission.lower()):
+                        result |= ord(x) ^ ord(y)
+                else:
+                    for x, y in zip(correct_flag, submission):
+                        result |= ord(x) ^ ord(y)
+
+                if result == 0:
                     return True, "Correct"
             except FlagException as e:
                 return False, str(e)

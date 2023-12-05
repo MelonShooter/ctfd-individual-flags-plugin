@@ -2,7 +2,7 @@
 
 A CTFd plugin to make challenges that have per-user flags. This will introduce a new challenge type where flags
 can be configured per user to contain bytes derived with a keyed hash function to make it different (or at least
-likely different) from other users
+likely different) from other users.
 
 # How to install plugin
 
@@ -43,3 +43,4 @@ user submitting the flag.
 
 1. Add a way to individualize file distribution
 2. Add separate templates to use for challenges, not just from standard
+3. Test/enable compatibility with teams mode.
